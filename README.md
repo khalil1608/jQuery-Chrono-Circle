@@ -1,13 +1,7 @@
-# jQuery-Chrono-Circle
-JQuery plugin for starting a chronometer easily
-
 jQuery-Chrono-Circle (version 0.1)
 ==================================
 
 jQuery plugin for starting a chronometer easily.
-
-## Example Usage
-<http://jsfiddle.net/khalil1608/r7naae0c/>
 
 ### HTML
 
@@ -46,7 +40,7 @@ input, textarea { color: #000; }
 I’d suggest sticking to the `#aaa` color for placeholder text, as it’s the default in most browsers that support `@placeholder`. If you really want to, though, you can [style the placeholder text in some of the browsers that natively support it](https://stackoverflow.com/a/2610741/96656).
 
 ## Installation
-Download the code from GitHub and copy the dist directory to your project.
+Download the code from GitHub and copy the assets directory to your project.
 Include the following lines of code in the <head> section of your HTML.
 
 ```
@@ -88,6 +82,9 @@ Include the following lines of code in the <head> section of your HTML.
 
 </html>
 ```
+
+## Example
+<http://jsfiddle.net/khalil1608/r7naae0c/>
 
 ## Notes
 
