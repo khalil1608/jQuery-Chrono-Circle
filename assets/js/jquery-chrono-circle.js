@@ -141,7 +141,6 @@
             }
             else if(diff.min > 0)
             {
-                console.log("test");
                 displayElement.text.text(  diff.min+' m'  );
                 var time = (diff.min * 60) + diff.sec;
                 degree = getDegree(time, 'min');
