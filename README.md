@@ -28,17 +28,6 @@ $('.chronometer').chronometer({
 });
 ```
 
-### CSS
-
-The plugin automatically adds `class="placeholder"` to the elements who are currently showing their placeholder text. You can use this to style placeholder text differently:
-
-```css
-input, textarea { color: #000; }
-.placeholder { color: #aaa; }
-```
-
-I’d suggest sticking to the `#aaa` color for placeholder text, as it’s the default in most browsers that support `@placeholder`. If you really want to, though, you can [style the placeholder text in some of the browsers that natively support it](https://stackoverflow.com/a/2610741/96656).
-
 ## Installation
 Download the code from GitHub and copy the assets directory to your project.
 Include the following lines of code in the <head> section of your HTML.
