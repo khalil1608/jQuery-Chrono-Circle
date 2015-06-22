@@ -5,6 +5,8 @@
 
         var defauts=
         {
+            "width": '100px',
+            "height": '100px',
             "days": 0,
             "hours": 0,
             "minutes": 0,
@@ -19,7 +21,7 @@
 
         var i = 0 , prec;
         var degs = 360;
-        var activeBorder = $("#activeBorder");
+        var activeBorder = null;
 
         var displayElement = {
             'text': null
@@ -73,11 +75,12 @@
             {
                 if(type == 'day')
                 {
-                    degree = (time * 360) / parameters.day;
+                    time = time%60 ;
+                    degree = (time * 360) / 60;
                 }
                 else if(type == 'hour')
                 {
-                    time = (time / 60) / 60;
+                    time = time%60 ;
                     degree = (time * 360) / 60;
                 }
                 else if(type == 'min')
@@ -107,10 +110,22 @@
                 prec = (100*i)/360;
             }
             if (i<=180){
-                activeBorder.css('background-image','linear-gradient(' + (90+i) + 'deg, transparent 50%, '+ parameters.borderColorActive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive+' 50%, transparent 50%)');
+
+
+                activeBorder.css({
+                    'background-image': 'linear-gradient(' + (90+i) + 'deg, transparent 50%, '+ parameters.borderColorActive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive+' 50%, transparent 50%)',
+                    //'width': parameters.width + 10,
+                    //'height': parameters.height + 10
+                });
             }
             else{
-                activeBorder.css('background-image','linear-gradient(' + (i-90) + 'deg, transparent 50%, '+ parameters.borderColorInactive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive +' 50%, transparent 50%)');
+                activeBorder.css({
+                    'background-image': 'linear-gradient(' + (i-90) + 'deg, transparent 50%, '+ parameters.borderColorInactive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive +' 50%, transparent 50%)',
+                    // 'width': parameters.width + 10,
+                    //'height': parameters.height + 10
+                });
+
+
             }
 
         };
@@ -131,17 +146,23 @@
 
             if(diff.day > 0)
             {
-                displayElement.text.text(  diff.day+' d'  );
-                degree = getDegree(diff.day, 'day');
+                var hour = (diff.hour >= 10) ? diff.hour : '0'+diff.hour;
+                var min = (diff.min >= 10) ? diff.min : '0'+diff.min;
+                displayElement.text.html(  diff.day+'d<sup>'+hour+'h'+min+'</sup>'  );
+                var time = (diff.day * 24) + diff.hour + diff.min + diff.sec;
+                degree = getDegree(time, 'day');
             }
             else if(diff.hour > 0)
             {
-                displayElement.text.text(  diff.hour+' h'  );
-                degree = getDegree(diff.day, 'hour');
+                var min = (diff.min >= 10) ? diff.min : '0'+diff.min;
+                displayElement.text.html(  diff.hour+'h<sup>' + min + '</sup>'  );
+                var time = (diff.hour * 60) + diff.min + diff.sec;
+                degree = getDegree(time, 'hour');
+
             }
             else if(diff.min > 0)
             {
-                displayElement.text.text(  diff.min+' m'  );
+                displayElement.text.html(  diff.min+'<sup> m</sup>'  );
                 var time = (diff.min * 60) + diff.sec;
                 degree = getDegree(time, 'min');
             }
@@ -159,6 +180,7 @@
         this.each(function()
         {
             var element=$(this);
+            activeBorder = element.find('.active-border');
 
             displayElement  =
             {
@@ -168,11 +190,10 @@
             element.css({
                 'width': parameters.width,
                 'height': parameters.height,
-                'line-height': parameters.height,
                 "border": parameters.border_size+' solid '+parameters.border_color
             });
 
-            element.find('.circle').css('background-color', parameters.backgroundColor);
+
             // Start Chronometer
             start();
             // Start Chronometer With interval
