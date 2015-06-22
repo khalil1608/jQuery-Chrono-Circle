@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery Chrono Circle Plugin</title>
+    <link rel="stylesheet" href="assets/css/jquery-chrono-circle.min.css"/>
+</head>
+
+<body>  
+    <div class="chronometer">
+        <div id="activeBorder" class="active-border">
+            <div id="circle" class="circle">
+                <span class="prec">0%</span>
+            </div>
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="assets/js/jquery-chrono-circle.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('.chronometer').chronometer({
+                "days": 0,
+                "hours": 0,
+                "minutes": 0,
+                "seconds": 10
+            });
+        });
+    </script>
+</body>
+
+</html>
