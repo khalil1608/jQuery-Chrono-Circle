@@ -1,7 +1,7 @@
 jQuery-Chrono-Circle (version 0.1)
 ==================================
 
-jQuery countdown/clock plugin for starting a chronometer easily (with callback).
+jQuery countdown / clock plugin for starting a chronometer easily (with callback).
 
 ### HTML
 
