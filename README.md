@@ -1,7 +1,11 @@
-jQuery-Chrono-Circle (version 0.1)
+jQuery-Chrono-Circle (version 0.2)
 ==================================
 
 jQuery countdown / clock plugin for starting a chronometer easily (with callback).
+
+### Requires
+
+* jQuery's
 
 ### HTML
 
@@ -47,6 +51,11 @@ You can pass a set of these options to set a custom behaviour and look for the p
         <th>Default</th>
         <th>Description</th>
     </tr>
+     <tr>
+        <td><strong>width</strong></td>
+        <td>100</td>
+        <td>Width</td>
+    </tr>
     <tr>
         <td><strong>days</strong></td>
         <td>0</td>
@@ -68,9 +77,22 @@ You can pass a set of these options to set a custom behaviour and look for the p
         <td>Number of secondes</td>
     </tr>
     <tr>
+        <td><strong>direction</strong></td>
+        <td>right</td>
+        <td>
+            <strong>left</strong> : clockwise<br/>
+            <strong>right</strong> : counterclockwise
+        </td>
+    </tr>
+    <tr>
         <td><strong>callback</strong></td>
         <td>null</td>
         <td>Callback at the end of time</td>
+    </tr>
+    <tr>
+        <td><strong>function</strong></td>
+        <td>null</td>
+        <td>Function when clock start</td>
     </tr>
      <tr>
         <td><strong>borderColorActive</strong></td>
