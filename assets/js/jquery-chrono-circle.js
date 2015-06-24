@@ -5,13 +5,14 @@
 
         var defauts=
         {
-            "width": '100px',
-            "height": '100px',
+            "width": 100,
             "days": 0,
             "hours": 0,
             "minutes": 0,
             "seconds": 0,
+            "direction": "right",
             "callback": null,
+            "function": null,
             "borderColorActive": '#A2ECFB',
             "borderColorInactive": '#39B4CC',
             "backgroundColor": '#f9f9f9'
@@ -110,19 +111,17 @@
                 prec = (100*i)/360;
             }
             if (i<=180){
-
-
                 activeBorder.css({
                     'background-image': 'linear-gradient(' + (90+i) + 'deg, transparent 50%, '+ parameters.borderColorActive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive+' 50%, transparent 50%)',
-                    //'width': parameters.width + 10,
-                    //'height': parameters.height + 10
+                    'width': (parameters.width)+'px' ,
+                    'height': (parameters.width)+'px'
                 });
             }
             else{
                 activeBorder.css({
                     'background-image': 'linear-gradient(' + (i-90) + 'deg, transparent 50%, '+ parameters.borderColorInactive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive +' 50%, transparent 50%)',
-                    // 'width': parameters.width + 10,
-                    //'height': parameters.height + 10
+                    'width': (parameters.width)+'px' ,
+                    'height': (parameters.width)+'px'
                 });
 
 
@@ -172,7 +171,8 @@
                 degree = getDegree(diff.sec, 'secs');
             }
 
-            degree = 360 - degree;
+
+            degree = (parameters.direction == 'right') ? degree : 360 - degree;
             draw(degree);
             return diff;
         };
@@ -181,17 +181,23 @@
         {
             var element=$(this);
             activeBorder = element.find('.active-border');
-
+            circle = element.find('.circle');
             displayElement  =
             {
                 'text': element.find('.prec')
             };
             //Set width and height container
             element.css({
-                'width': parameters.width,
-                'height': parameters.height,
+                'width': (parameters.width - 10)+'px',
+                'height': (parameters.width - 10)+'px',
                 "border": parameters.border_size+' solid '+parameters.border_color
             });
+            circle.css({
+                'width': (parameters.width - 10)+'px',
+                'height': (parameters.width - 10)+'px'
+            });
+
+            circle.find('.prec').css('top', ((parameters.width - 10) / 3)+'px');
 
 
             // Start Chronometer
@@ -210,6 +216,11 @@
                     }
                 }
             },1000);
+
+            if(parameters.function)
+            {
+                parameters.function();
+            }
         });
         return this;
     };
