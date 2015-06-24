@@ -148,7 +148,7 @@ You can pass a set of these options to set a custom behaviour and look for the p
 ```
 
 ## Example
-<http://jsfiddle.net/khalil1608/r7naae0c/7/>
+<http://jsfiddle.net/khalil1608/r7naae0c/8/>
 
 ## Notes
 
