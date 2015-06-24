@@ -112,16 +112,20 @@
             }
             if (i<=180){
                 activeBorder.css({
+                    //'background-color': parameters.borderColorActive,
                     'background-image': 'linear-gradient(' + (90+i) + 'deg, transparent 50%, '+ parameters.borderColorActive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive+' 50%, transparent 50%)',
                     'width': (parameters.width)+'px' ,
-                    'height': (parameters.width)+'px'
+                    'height': (parameters.width)+'px',
+
                 });
             }
             else{
                 activeBorder.css({
+                    'background-color': parameters.borderColorInactive,
                     'background-image': 'linear-gradient(' + (i-90) + 'deg, transparent 50%, '+ parameters.borderColorInactive +' 50%),linear-gradient(90deg, '+ parameters.borderColorActive +' 50%, transparent 50%)',
                     'width': (parameters.width)+'px' ,
-                    'height': (parameters.width)+'px'
+                    'height': (parameters.width)+'px',
+
                 });
 
 
@@ -186,6 +190,9 @@
             {
                 'text': element.find('.prec')
             };
+            activeBorder.css({
+                "background-color": parameters.borderColorInactive
+            });
             //Set width and height container
             element.css({
                 'width': (parameters.width - 10)+'px',
