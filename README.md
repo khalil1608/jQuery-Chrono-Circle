@@ -1,7 +1,13 @@
-jQuery-Chrono-Circle (version 0.2)
+jQuery-Chrono-Circle (version 0.3)
 ==================================
 
 jQuery countdown / clock plugin for starting a chronometer easily (with callback).
+
+## What's new ?
+
+* v0.3 :
+    - Audio Management.
+    - Bugs Fixs.
 
 ### Requires
 
@@ -109,6 +115,15 @@ You can pass a set of these options to set a custom behaviour and look for the p
          <td>#f9f9f9</td>
          <td>Background color</td>
     </tr>
+    <tr>
+         <td><strong>audio</strong></td>
+         <td>null</td>
+         <td>
+            <strong>Options :</strong><br/>
+            <strong>"src"</strong> : Link to the audio file<br/>
+            <strong>"startTimeAudio"</strong> : Second from the moment the sound starts<br/>
+        </td>
+    </tr>
 </table>
 
 
@@ -135,11 +150,20 @@ You can pass a set of these options to set a custom behaviour and look for the p
     <script type="text/javascript">
         $(document).ready(function() {
             $('.chronometer').chronometer({
-                "days": 0,
-                "hours": 0,
-                "minutes": 10,
-                "seconds": 10
-            });
+                   "days": 0,
+                   "hours": 0,
+                   "minutes": 1,
+                   "seconds": 10,
+                   "audio": [
+                       {
+                           "src": 'assets/audio/clock-ticking-1.mp3',
+                           "startTimeAudio": 59 //The audio file starts when 115 seconds remain
+                       }
+                   ],
+                   'callback': function () {
+                       //Do Something
+                   }
+               });
         });
     </script>
 </body>
