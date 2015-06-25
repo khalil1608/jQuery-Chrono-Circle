@@ -14,14 +14,23 @@
         </div>
     </div>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="assets/js/jquery-chrono-circle.min.js"></script>
+    <script src="assets/js/jquery-chrono-circle.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.chronometer').chronometer({
                 "days": 0,
-                "hours": 1,
-                "minutes": 10,
-                "seconds": 59
+                "hours": 0,
+                "minutes": 0,
+                "seconds": 10,
+                "audio": [
+                    {
+                        "src": 'assets/audio/clock-ticking-1.mp3',
+                        "startTimeAudio": 5 //The audio file starts when 115 seconds remain
+                    }
+                ],
+                'callback': function () {
+                    //Do Something
+                }
             });
         });
     </script>
