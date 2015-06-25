@@ -15,14 +15,15 @@
             "function": null,
             "borderColorActive": '#A2ECFB',
             "borderColorInactive": '#39B4CC',
-            "backgroundColor": '#f9f9f9'
+            "backgroundColor": '#f9f9f9',
+            'audio': null
         };
-
         var parameters=$.extend(defauts, options);
 
         var i = 0 , prec;
         var degs = 360;
         var activeBorder = null;
+        var myAudio = null;
 
         var displayElement = {
             'text': null
@@ -50,6 +51,9 @@
         targetTime = addHours(targetTime, parameters.hours);
         targetTime = addMinutes(targetTime, parameters.minutes);
         targetTime = addSeconds(targetTime, parameters.seconds);
+
+        var pAudio = (parameters.audio != null) ? parameters.audio[0] : null ;
+
 
         // Difference between two dates => day / hour / minute /second
         var dateDiff = function(date1, date2){
@@ -98,6 +102,25 @@
 
         };
 
+        var createAudio = function () {
+            myAudio = new Audio(pAudio.src);
+            myAudio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+            myAudio.play();
+        };
+
+        var destroyAudio = function(aud)
+        {
+            if(aud != null)
+            {
+                $(aud).trigger('pause');
+            }
+        }
+
+
+
         //Draw circle
         var draw = function(i){
             i++;
@@ -143,6 +166,12 @@
                 timeNow = targetTime;
             }
 
+            //create audio
+            if(pAudio != null && Math.round((targetTime - timeNow.getTime()) / 1000) == pAudio.startTimeAudio)
+            {
+                createAudio();
+            }
+
             // Calculating remaining time
             var diff = dateDiff(timeNow, targetTime);
             var degree = 0;
@@ -157,21 +186,22 @@
             }
             else if(diff.hour > 0)
             {
-                var min = (diff.min >= 10) ? diff.min : '0'+diff.min;
-                displayElement.text.html(  diff.hour+'h<sup>' + min + '</sup>'  );
+                var text = (diff.hour * 60) + diff.min ;
+
+                displayElement.text.html(  text+'\''  );
                 var time = (diff.hour * 60) + diff.min + diff.sec;
                 degree = getDegree(time, 'hour');
 
             }
             else if(diff.min > 0)
             {
-                displayElement.text.html(  diff.min+'<sup> m</sup>'  );
+                displayElement.text.html(  diff.min+'\''  );
                 var time = (diff.min * 60) + diff.sec;
                 degree = getDegree(time, 'min');
             }
             else
             {
-                displayElement.text.text(  diff.sec+' s'  );
+                displayElement.text.text(  diff.sec+'"'  );
                 degree = getDegree(diff.sec, 'secs');
             }
 
@@ -201,10 +231,11 @@
             });
             circle.css({
                 'width': (parameters.width - 10)+'px',
-                'height': (parameters.width - 10)+'px'
+                'height': (parameters.width - 10)+'px',
+                'background-color': parameters.backgroundColor
             });
 
-            circle.find('.prec').css('top', ((parameters.width - 10) / 3)+'px');
+            displayElement.text.css('top', ((parameters.width - 10) / 3)+'px');
 
 
             // Start Chronometer
@@ -217,6 +248,8 @@
                 if(result.day == 0 && result.hour == 0 && result.min == 0 && result.sec == 0)
                 {
                     clearInterval(interval);
+                    destroyAudio(myAudio);
+
                     if(parameters.callback)
                     {
                         parameters.callback();
